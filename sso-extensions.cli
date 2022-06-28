@@ -2,10 +2,10 @@ batch
 
 set DB_DRIVER_NAME=mssql
 set DB_USERNAME=sa
-set DB_PASSWORD=aA1UKWeRg1x
+set DB_PASSWORD=aA12OvAVq1B
 set DB_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerDriver
 set DB_XA_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerXADataSource
-set DB_JDBC_URL=jdbc:microsoft:sqlserver://mssql.rh-cef-rhsso-sql-server.svc.cluster.local:1433;DatabaseName=mssql
+set DB_JDBC_URL=jdbc:microsoft:sqlserver://mssql.rh-demo-app.svc.cluster.local:1433;DatabaseName=mssql
 set DB_EAP_MODULE=com.microsoft
 
 set FILE=/opt/eap/extensions/jdbc-driver.jar
