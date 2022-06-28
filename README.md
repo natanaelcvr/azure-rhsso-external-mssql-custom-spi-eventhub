@@ -94,7 +94,7 @@ oc new-app -f configs/sso75-ocp4-x509-postgresql-persistent-custom-spi.yaml \
 -p SSO_ADMIN_USERNAME=admin 
 -p SSO_ADMIN_PASSWORD=admin 
 -p MAVEN_MIRROR_URL=<external_repository_Nexus>
--p GIT_SPI_URL=https://github.com/gferreir/keycloak-custom-spi-event-azure.git
+-p GIT_SPI_URL=https://github.com/natanaelcvr/azure-rhsso-external-mssql-custom-spi-eventhub.git
 -p AZURE_EVENT_HUB_CONNECTION_STRING= <your_connection_string_here>\
 -p AZURE_EVENT_HUB_NAME=<your_event_hub_name_here> \
 -p AZURE_EVENT_HUB_ADMIN_NAME=<your_event_hub_admin_name_here> # OPTIONAL
