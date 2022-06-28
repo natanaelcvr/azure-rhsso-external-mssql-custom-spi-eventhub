@@ -10,8 +10,6 @@ RUN chmod -R 777 /opt/java/app
 
 USER jboss
 # RUN sed -i -e 's/<mirrors>/&\n    <mirror>\n      <id>external<\/id>\n      <url>${env.MAVEN_MIRROR_URL}<\/url>\n      <mirrorOf>external:*<\/mirrorOf>\n    <\/mirror>/' ${HOME}/.m2/settings.xml && \
-RUN ls ${JAVA_DATA_DIR}
-RUN pwd
 RUN mvn -s /opt/java/app/config/settings.xml clean package
 
 FROM registry.redhat.io/rh-sso-7/sso75-openshift-rhel8:7.5
