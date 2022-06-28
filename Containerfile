@@ -15,7 +15,7 @@ RUN mvn -s settings.xml clean package
 FROM registry.redhat.io/rh-sso-7/sso75-openshift-rhel8:7.5
 
 COPY --from=builder /opt/java/app/target/*.jar ${JBOSS_HOME}/standalone/deployments/.
-COPY mssql-jdbc-9.2.0.jre8.jar ${JBOSS_HOME}/extensions/jdbc-driver.jar
+COPY --from=builder /opt/java/app/mssql-jdbc-9.2.0.jre8.jar ${JBOSS_HOME}/extensions/jdbc-driver.jar
 
 USER 185
 CMD ["/opt/eap/bin/openshift-launch.sh"]
