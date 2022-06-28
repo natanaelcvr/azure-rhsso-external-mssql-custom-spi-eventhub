@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/openjdk-11:1.12-1.1651233100 AS builder
+FROM registry.access.redhat.com/ubi8/openjdk-11:1.13-1.1655306377 AS builder
 
 ARG MAVEN_MIRROR_URL
 ENV MAVEN_MIRROR_URL=${MAVEN_MIRROR_URL}
