@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/openjdk-11:1.12-1.1651233100 AS builder
+FROM registry.access.redhat.com/ubi8/openjdk-11:1.13-1.1655306377 AS builder
 
 ARG MAVEN_MIRROR_URL
 ENV MAVEN_MIRROR_URL=${MAVEN_MIRROR_URL}
@@ -10,9 +10,7 @@ RUN chmod -R 777 /opt/java/app
 
 USER jboss
 # RUN sed -i -e 's/<mirrors>/&\n    <mirror>\n      <id>external<\/id>\n      <url>${env.MAVEN_MIRROR_URL}<\/url>\n      <mirrorOf>external:*<\/mirrorOf>\n    <\/mirror>/' ${HOME}/.m2/settings.xml && \
-RUN ls ${JAVA_DATA_DIR}
-RUN pwd
-RUN mvn -s /opt/java/app/config/settings.xml clean package
+RUN mvn -s settings.xml clean package
 
 FROM registry.redhat.io/rh-sso-7/sso75-openshift-rhel8:7.5
 
