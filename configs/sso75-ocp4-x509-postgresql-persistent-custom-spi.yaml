@@ -125,11 +125,17 @@ parameters:
       If not provided, the value of AZURE_EVENT_HUB_NAME will be used instead.
     name: AZURE_EVENT_HUB_ADMIN_NAME
     required: false
+  - displayName: MSSQL driver name
+    description: >-
+      Driver name to be used
+    name: MSSQL_DRIVER
+    value: "mssql"
+    required: false
   - displayName: MSSQL database name that will be creates and used by RHSSO
     description: >-
       Driver class to be used
     name: MSSQL_DATABASE
-    value: 'RH_SSO'
+    value: "RH_SSO"
     required: false
   - displayName: Database Username
     description: Database user name
@@ -146,7 +152,6 @@ parameters:
   - displayName: Database URL
     description: Database connection URL
     name: MSSQL_URL
-    generate: expression
     required: true
 # End Custom Parameters
 objects:
@@ -348,7 +353,7 @@ objects:
                 # End Custom Envs
                 # Begin Custom Datasource
                 - name: DATASOURCES
-                  value: MSSQL
+                  value: 'MSSQL'
                 - name: MSSQL_DATABASE
                   value: ${MSSQL_DATABASE}
                 - name: MSSQL_USERNAME
@@ -358,9 +363,11 @@ objects:
                 - name: MSSQL_URL
                   value: ${MSSQL_URL}
                 - name: MSSQL_JNDI
-                  value: 'jboss/datasources/KeycloakDS'
+                  value: 'java:jboss/datasources/KeycloakDS'
+                - name: MSSQL_DRIVER
+                  value: ${MSSQL_DRIVER}
                 - name: MSSQL_NONXA
-                  value: true
+                  value: 'true'
                 # End Custom Datasource
           volumes:
             - name: sso-x509-https-volume
