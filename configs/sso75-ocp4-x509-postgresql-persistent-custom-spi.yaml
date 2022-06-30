@@ -19,9 +19,9 @@ metadata:
       re-encrypt TLS.
     template.openshift.io/documentation-url: https://access.redhat.com/documentation/en/red-hat-single-sign-on/
     template.openshift.io/support-url: https://access.redhat.com
-  name: sso75-ocp4-x509-external-mssql-persistent
+  name: sso75-x509-external-mssql-persistent
 labels:
-  template: sso75-ocp4-x509-external-mssql-persistent
+  template: sso75-x509-external-mssql-persistent
   rhsso: 7.5.2.GA
 message: >-
   A new persistent RH-SSO service (using MS SQL) has been created in your
@@ -109,7 +109,7 @@ parameters:
   - displayName: Git Branch
     description: The git branch with SPI project.
     name: GIT_SPI_BRANCH
-    value: main
+    value: master
     required: false
   - displayName: Azure Event Hub Connection String
     description: Connection string to connect to a Azure Event Hub. More Info > https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create
@@ -140,15 +140,15 @@ parameters:
   - displayName: Database Username
     description: Database user name
     name: MSSQL_USERNAME
-    from: user[a-zA-Z0-9]{3}
+    from: aA1[a-zA-Z0-9]{3}
     generate: expression
-    required: true
+    required: false
   - displayName: Database Password
     description: Database user password
     name: MSSQL_PASSWORD
-    from: '[a-zA-Z0-9]{32}'
+    from: 'aA1[a-zA-Z0-9]{8}'
     generate: expression
-    required: true
+    required: false
   - displayName: Database URL
     description: Database connection URL
     name: MSSQL_URL
@@ -245,6 +245,16 @@ objects:
         name: ${APPLICATION_NAME}
       tls:
         termination: reencrypt
+  - kind: Secret
+    apiVersion: v1
+    stringData:
+      MSSQL_PASSWORD: "${MSSQL_PASSWORD}"
+      MSSQL_USERNAME: "${MSSQL_USERNAME}"
+      MSSQL_DRIVER: "${MSSQL_DRIVER}"
+      MSSQL_DATABASE: "${MSSQL_DATABASE}"
+      MSSQL_URL: "${MSSQL_URL}"
+    metadata:
+      name: "${APPLICATION_NAME}-secret"
   - kind: DeploymentConfig
     apiVersion: apps.openshift.io/v1
     metadata:
@@ -355,17 +365,32 @@ objects:
                 - name: DATASOURCES
                   value: 'MSSQL'
                 - name: MSSQL_DATABASE
-                  value: ${MSSQL_DATABASE}
+                  valueFrom:
+                    secretKeyRef:
+                      name: "${APPLICATION_NAME}-secret"
+                      key: MSSQL_DATABASE
                 - name: MSSQL_USERNAME
-                  value: ${MSSQL_USERNAME}
+                  valueFrom:
+                    secretKeyRef:
+                      name: "${APPLICATION_NAME}-secret"
+                      key: MSSQL_USERNAME
                 - name: MSSQL_PASSWORD
-                  value: ${MSSQL_PASSWORD}
+                  valueFrom:
+                    secretKeyRef:
+                      name: "${APPLICATION_NAME}-secret"
+                      key: MSSQL_PASSWORD
                 - name: MSSQL_URL
-                  value: ${MSSQL_URL}
+                  valueFrom:
+                    secretKeyRef:
+                      name: "${APPLICATION_NAME}-secret"
+                      key: MSSQL_URL
+                - name: MSSQL_DRIVER
+                  valueFrom:
+                    secretKeyRef:
+                      name: "${APPLICATION_NAME}-secret"
+                      key: MSSQL_DRIVER
                 - name: MSSQL_JNDI
                   value: 'java:jboss/datasources/KeycloakDS'
-                - name: MSSQL_DRIVER
-                  value: ${MSSQL_DRIVER}
                 - name: MSSQL_NONXA
                   value: 'true'
                 # End Custom Datasource

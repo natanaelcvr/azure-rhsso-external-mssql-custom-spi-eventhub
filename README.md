@@ -95,13 +95,13 @@ oc new-app -f configs/sso75-ocp4-x509-postgresql-persistent-custom-spi.yaml \
 -p SSO_ADMIN_PASSWORD=admin \
 -p MAVEN_MIRROR_URL=https://maven.repository.redhat.com/ga/ \
 -p GIT_SPI_URL=https://github.com/natanaelcvr/azure-rhsso-external-mssql-custom-spi-eventhub.git \
--p AZURE_EVENT_HUB_CONNECTION_STRING="" \
--p AZURE_EVENT_HUB_NAME="" \
--p AZURE_EVENT_HUB_ADMIN_NAME="" \
+-p AZURE_EVENT_HUB_CONNECTION_STRING= \
+-p AZURE_EVENT_HUB_NAME= \
+-p AZURE_EVENT_HUB_ADMIN_NAME= \
 -p MSSQL_DATABASE=mssql \
 -p MSSQL_USERNAME=sa \
 -p MSSQL_PASSWORD=aA1YjcsD8WX \
--p MSSQL_URL=jdbc:microsoft:sqlserver://mssql.rh-demo-app.svc.cluster.local:1433;DatabaseName=mssql
+-p MSSQL_URL="jdbc:sqlserver://mssql.rh-demo-app.svc.cluster.local:1433;database=mssql"
 ```
 
 Above code explanation:
