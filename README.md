@@ -101,7 +101,7 @@ oc new-app -f configs/sso75-ocp4-x509-postgresql-persistent-custom-spi.yaml \
 -p MSSQL_DATABASE=mssql \
 -p MSSQL_USERNAME=sa \
 -p MSSQL_PASSWORD=aA1YjcsD8WX \
--p MSSQL_URL="jdbc:sqlserver://mssql.rh-demo-app.svc.cluster.local:1433;database=mssql"
+-p MSSQL_URL="jdbc:sqlserver://mssql.rh-demo-app.svc.cluster.local:1433"
 ```
 
 Above code explanation:
