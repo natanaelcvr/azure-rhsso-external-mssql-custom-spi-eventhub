@@ -12,7 +12,7 @@ USER jboss
 # RUN sed -i -e 's/<mirrors>/&\n    <mirror>\n      <id>external<\/id>\n      <url>${env.MAVEN_MIRROR_URL}<\/url>\n      <mirrorOf>external:*<\/mirrorOf>\n    <\/mirror>/' ${HOME}/.m2/settings.xml && \
 RUN mvn -s settings.xml clean package
 
-FROM registry.redhat.io/rh-sso-7/sso75-openshift-rhel8:7.5
+FROM registry.redhat.io/rh-sso-7/sso76-openshift-rhel8:7.6
 
 COPY --from=builder /opt/java/app/target/*.jar ${JBOSS_HOME}/standalone/deployments/.
 COPY mssql-jdbc-9.2.0.jre8.jar ${JBOSS_HOME}/extensions/jdbc-driver.jar
