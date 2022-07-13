@@ -5,29 +5,29 @@ metadata:
   annotations:
     iconClass: icon-sso
     tags: sso,keycloak,jboss
-    version: 7.5.2.GA
-    openshift.io/display-name: Red Hat Single Sign-On 7.5 on OpenJDK + External MS SQL (Persistent)
+    version: 7.6-2.GA
+    openshift.io/display-name: Red Hat Single Sign-On 7.6 on OpenJDK + External MS SQL (Persistent)
     openshift.io/provider-display-name: Red Hat, Inc.
     description: >-
-      An example application based on RH-SSO 7.5 on OpenJDK image. For more
+      An example application based on RH-SSO 7.6 on OpenJDK image. For more
       information about using this template, see
-      https://github.com/jboss-container-images/redhat-sso-7-openshift-image/tree/sso75-dev/docs.
+      https://github.com/jboss-container-images/redhat-sso-7-openshift-image/tree/sso76-dev/docs.
     template.openshift.io/long-description: >-
       This template defines resources needed to develop Red Hat Single Sign-On
-      7.5 on OpenJDK server based deployment, deployment configuration for
-      PostgreSQL using persistence, and securing RH-SSO communication using
+      7.6 on OpenJDK server based deployment, deployment configuration for
+      MSSQL using persistence, and securing RH-SSO communication using
       re-encrypt TLS.
     template.openshift.io/documentation-url: https://access.redhat.com/documentation/en/red-hat-single-sign-on/
     template.openshift.io/support-url: https://access.redhat.com
-  name: sso75-x509-external-mssql-persistent
+  name: sso76-x509-external-mssql-persistent
 labels:
-  template: sso75-x509-external-mssql-persistent
-  rhsso: 7.5.2.GA
+  template: sso76-x509-external-mssql-persistent
+  rhsso: 7.6-2.GA
 message: >-
   A new persistent RH-SSO service (using MS SQL) has been created in your
   project. The admin username/password for accessing the master realm via the
   RH-SSO console is ${SSO_ADMIN_USERNAME}/${SSO_ADMIN_PASSWORD}. The
-  username/password for accessing the PostgreSQL database "${DB_DATABASE}" is
+  username/password for accessing the MSSQL database "${DB_DATABASE}" is
   ${DB_USERNAME}/${DB_PASSWORD}. The HTTPS keystore used for serving secure
   content, the JGroups keystore used for securing JGroups communications, and
   server truststore used for securing RH-SSO requests were automatically created
@@ -177,7 +177,7 @@ objects:
       output: 
         to:
           kind: ImageStreamTag
-          name: sso75-openshift-rhel8-custom:7.5
+          name: sso76-openshift-rhel8-custom:7.6
       triggers:
       - imageChange: {}
         type: ImageChange
@@ -187,7 +187,7 @@ objects:
   - kind: ImageStream
     apiVersion: v1
     metadata:
-      name: sso75-openshift-rhel8-custom
+      name: sso76-openshift-rhel8-custom
 # End New Object
   - kind: ConfigMap
     apiVersion: v1
@@ -272,7 +272,7 @@ objects:
               - ${APPLICATION_NAME}
             from:
               kind: ImageStreamTag
-              name: sso75-openshift-rhel8-custom:7.5
+              name: sso76-openshift-rhel8-custom:7.6
         - type: ConfigChange
       replicas: 1
       selector:
@@ -284,7 +284,7 @@ objects:
             deploymentConfig: ${APPLICATION_NAME}
             application: ${APPLICATION_NAME}
         spec:
-          terminationGracePeriodSeconds: 75
+          terminationGracePeriodSeconds: 76
           containers:
             - name: ${APPLICATION_NAME}
               image: ${APPLICATION_NAME}
