@@ -90,7 +90,7 @@ To facilitate the deploy a custom RHSSO template was created extending a default
 To deploy a instance of RHSSO with this custom SPI on Openshift run the following snippet code:
 
 ```Bash
-oc new-app -f configs/sso75-ocp4-x509-postgresql-persistent-custom-spi.yaml \
+oc new-app -f configs/sso75-ocp4-x509-mssql-persistent-custom-spi.yaml \
 -p SSO_ADMIN_USERNAME=admin \
 -p SSO_ADMIN_PASSWORD=admin \
 -p MAVEN_MIRROR_URL=https://maven.repository.redhat.com/ga/ \
